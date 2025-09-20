@@ -1,73 +1,52 @@
-/* ==== Fondo con imagen y blur SOLO detrás del contenido ==== */
+/* Fondo con imagen y blur detrás del contenido */
 body{
-  margin:0;
-  padding:0;
-  min-height:100vh;
-  color:#000; /* ajusta a gusto */
-  /* ruta correcta a tu imagen */
+  margin:0; padding:0; min-height:100vh;
+  color:#fff;
   background: url('/css/img/fondoweb.jpg') no-repeat center center fixed;
   background-size: cover;
-
-  position: relative;         /* crea stacking context */
-  isolation: isolate;         /* evita que algo quede por detrás del body */
+  position: relative; isolation: isolate;
 }
-
-/* Capa que aplica el blur; SIEMPRE detrás del contenido */
 body::before{
-  content:"";
-  position: fixed;            /* cubre toda la ventana */
-  inset:0;
-  z-index:-1;                 /* queda detrás gracias a isolation del body */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  background-color: rgba(115,115,115,0.30); /* leve oscurecido */
-  pointer-events:none;        /* no bloquea clics */
+  content:""; position:fixed; inset:0; z-index:-1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.35); /* oscurecido global */
 }
 
-/* Contenido por encima (sin blur) */
-header, main, footer, h1, .products, .contenedor{
-  position: relative;
-  z-index: 0;                 /* por encima del ::before */
-}
+/* Centrado de la vista */
+.page{ min-height:100vh; display:grid; place-items:center; padding:32px 16px; }
 
-/* Bloques estilo glassmorphism */
-.products div,
-.contenedor {
-  background: rgba(255, 255, 255, 0.18); 
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+/* Tarjeta “glass” oscura */
+.card{
+  width:min(900px, 92vw);
+  padding:28px; border-radius:18px;
+  background: rgba(20,20,20,0.38);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow:0 12px 40px rgba(0,0,0,.40);
+  border:1px solid rgba(255,255,255,.12);
 }
+.card h1{ margin:0 0 16px; text-align:center; }
 
-/* Header y navegación */
-header {
-  background: #6666662c;
-  padding: 15px;
-  text-align: center;
-}
-nav a { 
-  color: #000;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-nav a:hover {
-  color: #fff;
-}
+/* Tabla */
+.table{ width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; }
+.table th,.table td{ padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08); }
+.table th{ background:rgba(255,255,255,.08); text-align:left; }
+.table tr:hover td{ background:rgba(255,255,255,.06); }
 
-/* Título */
-h1 {
-  text-align: center;
-  margin: 30px 0;
-  font-size: 2.5rem;
-  color: #000;
-}
+/* Botones */
+.actions{ display:flex; gap:12px; justify-content:center; margin-top:18px; }
+.btn{ display:inline-block; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600; border:1px solid transparent; transition:.15s; }
+.btn:hover{ transform:translateY(-1px); }
+.btn-primary{ background:#ff6a00; color:#111; }
+.btn-primary:hover{ box-shadow:0 6px 20px rgba(255,106,0,.35); }
+.btn-outline{ color:#fff; border-color:rgba(255,255,255,.35); }
+.btn-outline:hover{ background:rgba(255,255,255,.12); }
 
-/* Sección de productos */
-.products {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5em;
-  padding: 40px;
+/* Formulario */
+.form{ display:grid; gap:14px; }
+.form input{
+  padding:10px 12px; border-radius:10px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.25); color:#fff; outline:none;
 }
+.form input::placeholder{ color:#cfcfcf; opacity:.7; }

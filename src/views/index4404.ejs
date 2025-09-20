@@ -1,28 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carros Index 4404</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carros</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h1>Carros</h1>
-  <p><a href="/carros4404/create">+ Nuevo carro</a></p>
+  <main class="page">
+    <section class="card">
+      <h1>Carros</h1>
 
-  <table border="1" cellpadding="6">
-    <thead>
-      <tr><th>ID</th><th>Marca</th><th>Ver</th></tr>
-    </thead>
-    <tbody>
-      <% carros.forEach(c => { %>
-        <tr>
-          <td><%= c.id %></td>
-          <td><%= c.marca %></td>
-          <td><a href="/carros4404/<%= c.id %>">Show</a></td>
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+      <table class="table">
+        <thead>
+          <tr><th>ID</th><th>Marca</th><th style="width:120px;">Acciones</th></tr>
+        </thead>
+        <tbody>
+          <% carros.forEach(c => { %>
+            <tr>
+              <td><%= c.id %></td>
+              <td><%= c.marca %></td>
+              <td>
+                <a class="btn btn-outline" href="/carros4404/<%= c.id %>">Show</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="/carros4404/create">+ Nuevo carro</a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
