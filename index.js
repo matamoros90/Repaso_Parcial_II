@@ -1,20 +1,28 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 
 const app = express();
 
+// Middleware para parsear formularios/JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use('/carros4404', require('./src/routes/habitacion4404.router'));
 
+// ✅ Servir archivos estáticos de /public
+// /css/style.css  ->  /public/css/style.css
+// /img/fondo.jpg  ->  /public/img/fondo.jpg
+app.use(express.static(path.join(__dirname, 'public')));
+
+// EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
 
-/* Mis rutas 4404 */
-const habitacion4404Router = require('./src/routes/habitacion4404.router');
-app.use('/', habitacion4404Router);
+// Home -> lista
+app.get('/', (req, res) => res.redirect('/habitacion04'));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+// Rutas
+const habitacionRouter = require('./src/routes/habitacion04.router');
+app.use('/habitacion04', habitacionRouter);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`http://localhost:${port}`));

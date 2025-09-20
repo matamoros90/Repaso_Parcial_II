@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Habitaciones</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <section class="card">
+      <h1>Habitaciones</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% habitaciones.forEach(h => { %>
+            <tr>
+              <td><%= h.id %></td>
+              <td><%= h.nombre %></td>
+              <td>
+                <a class="btn btn-outline" href="/habitacion04/<%= h.id %>">Ver</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="/habitacion04/create">+ Nueva habitación</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

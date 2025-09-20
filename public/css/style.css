@@ -1,52 +1,123 @@
-/* Fondo con imagen y blur detrás del contenido */
+/* ====== Base + fondo con blur detrás ====== */
+* { box-sizing: border-box; }
+:root{
+  --glass-bg: rgba(20,20,20,.45);
+  --glass-brd: rgba(255,255,255,.14);
+  --ink: #f3f3f3;
+  --muted: rgba(255,255,255,.75);
+  --accent: #ff6a00;        /* naranja del botón */
+}
+
+html,body{ height:100%; }
 body{
   margin:0; padding:0; min-height:100vh;
-  color:#fff;
+  color: var(--ink);
   background: url('/css/img/fondoweb.jpg') no-repeat center center fixed;
   background-size: cover;
   position: relative; isolation: isolate;
 }
 body::before{
-  content:""; position:fixed; inset:0; z-index:-1;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background: rgba(0,0,0,0.35); /* oscurecido global */
+  content:""; position: fixed; inset:0; z-index:-1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.38);        /* oscurecido global para legibilidad */
 }
 
-/* Centrado de la vista */
-.page{ min-height:100vh; display:grid; place-items:center; padding:32px 16px; }
+/* ====== Layout centrado ====== */
+.page{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
 
-/* Tarjeta “glass” oscura */
+/* ====== Tarjeta glass ====== */
 .card{
-  width:min(900px, 92vw);
-  padding:28px; border-radius:18px;
-  background: rgba(20,20,20,0.38);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  box-shadow:0 12px 40px rgba(0,0,0,.40);
-  border:1px solid rgba(255,255,255,.12);
+  width: min(960px, 92vw);
+  padding: 28px;
+  border-radius: 18px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-brd);
+  box-shadow: 0 14px 44px rgba(0,0,0,.42);
 }
-.card h1{ margin:0 0 16px; text-align:center; }
+.card h1{
+  margin: 0 0 18px;
+  text-align: center;
+}
 
-/* Tabla */
-.table{ width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; }
-.table th,.table td{ padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08); }
-.table th{ background:rgba(255,255,255,.08); text-align:left; }
-.table tr:hover td{ background:rgba(255,255,255,.06); }
+/* ====== Tabla ====== */
+.table{
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.table th, .table td{
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  color: var(--ink);
+}
+.table th{
+  text-align: left;
+  background: rgba(255,255,255,.08);
+}
+.table tr:hover td{
+  background: rgba(255,255,255,.06);
+}
 
-/* Botones */
-.actions{ display:flex; gap:12px; justify-content:center; margin-top:18px; }
-.btn{ display:inline-block; padding:10px 16px; border-radius:10px; text-decoration:none; font-weight:600; border:1px solid transparent; transition:.15s; }
-.btn:hover{ transform:translateY(-1px); }
-.btn-primary{ background:#ff6a00; color:#111; }
-.btn-primary:hover{ box-shadow:0 6px 20px rgba(255,106,0,.35); }
-.btn-outline{ color:#fff; border-color:rgba(255,255,255,.35); }
-.btn-outline:hover{ background:rgba(255,255,255,.12); }
+/* Enlaces dentro de la tabla (Show) */
+.table a{ color: #8ecbff; text-decoration: none; }
+.table a:hover{ text-decoration: underline; }
 
-/* Formulario */
-.form{ display:grid; gap:14px; }
+/* ====== Botones ====== */
+.actions{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+}
+.btn{
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  cursor: pointer;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn-primary{
+  background: var(--accent);
+  color: #111;
+  box-shadow: 0 6px 20px rgba(255,106,0,.35);
+}
+.btn-primary:hover{ box-shadow: 0 8px 26px rgba(255,106,0,.45); }
+.btn-outline{
+  color: var(--ink);
+  border-color: rgba(255,255,255,.35);
+  background: transparent;
+}
+.btn-outline:hover{ background: rgba(255,255,255,.12); }
+
+/* ====== Formulario ====== */
+.form{ display: grid; gap: 14px; }
+.form label{ color: var(--muted); font-size: .95rem; }
 .form input{
-  padding:10px 12px; border-radius:10px;
-  border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.25); color:#fff; outline:none;
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.28);
+  color: var(--ink);
+  outline: none;
 }
-.form input::placeholder{ color:#cfcfcf; opacity:.7; }
+.form input::placeholder{ color: #d7d7d7; opacity: .75; }
+
+/* ====== Responsive ====== */
+@media (max-width: 640px){
+  .card{ padding: 22px; }
+  .table th, .table td{ padding: 10px 10px; font-size: 14px; }
+}
